@@ -28,7 +28,7 @@ function init() {
     var geometryCube = new THREE.BoxGeometry(0.08, 0.08, 0.08);
     var loaderCube = new THREE.TextureLoader();
 
-    switch(1) {
+    switch(2) {
     case 1:
        var materialCube = new THREE.MeshLambertMaterial( { color: 0x00ff88 } );
        break;
