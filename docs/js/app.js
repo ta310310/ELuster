@@ -10,67 +10,106 @@ var sceneSphere = new THREE.Scene();
 
 var meshCube = new THREE.Mesh();
 
+var fps = 29.97;//1000 / 30;
+
+var EarthRag = 0;
+var EarthX=0;
+var EarthY=0;
+var EarthZ=0;
+var EarthD= 5;
+
+var MoonRag = 0;
+var MoonX=0;
+var MoonY=0;
+var MoonZ=0;
+var MoonD= 2;
+
+
 function init() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
+
+camera.position.set( 0, 0, 0 );
 
     controls.standing = true;
 
     effect.setSize(window.innerWidth, window.innerHeight);
 
     var light = new THREE.DirectionalLight(0xFFFFFF);
-    light.position.set(1.0, 1.0, 1.0);
+//    light.position.set(1.0, 1.0, 1.0);
+    light.position.set(0, 0, 0);
     scene.add( light );
 
     var ambientLight = new THREE.AmbientLight(0x888888);
     scene.add( ambientLight );
 
-    var geometryCube = new THREE.BoxGeometry(0.08, 0.08, 0.08);
-    var loaderCube = new THREE.TextureLoader();
-
-    switch(9) {
-    case 1:
-       var materialCube = new THREE.MeshLambertMaterial( { color: 0x00ff88 } );
-       break;
-    case 2:
-       var materialCube = new THREE.MeshLambertMaterial( { color: 0x00ff88, wireframe:true } );
-       break;
-    default:
-       var materials = [
-          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("./img/dice1.png")}),
-          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("./img/dice2.png")}),
-          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("./img/dice3.png")}),
-          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("./img/dice4.png")}),
-          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("./img/dice5.png")}),
-          new THREE.MeshLambertMaterial({map:THREE.ImageUtils.loadTexture("./img/dice6.png")}),
-       ];
-       var materialCube = new THREE.MeshFaceMaterial(materials);
-       break;
-    }
-
-    meshCube = new THREE.Mesh( geometryCube, materialCube );
-    meshCube.position.set(0, 0, -0.32);
-    sceneCube.add( meshCube );
-
-    var meshSphere = new THREE.Mesh();
-    var materialSphere = new THREE.MeshLambertMaterial( { color: 0x0088ff, wireframe:true } );
-    var geometrySphere = new THREE.SphereGeometry(0.6,32,32);
-    meshSphere = new THREE.Mesh( geometrySphere, materialSphere );
-    meshSphere.position.set(0, 0, 0);
-    sceneSphere.add( meshSphere );
-
-    //scene.add( sceneSphere );
-    scene.add( sceneCube );
-
     var scenePhoto = new THREE.Scene();
     var loaderPhoto = new THREE.TextureLoader();
-    var texturePhoto = loaderPhoto.load( './img/photo2.jpg');
-    var materialPhoto = new THREE.MeshLambertMaterial({ map:texturePhoto, side:THREE.BackSide });
-    var geometryPhoto = new THREE.SphereGeometry(3.0,32,32);
+    var texturePhoto = loaderPhoto.load( './img/starfield.jpg');
+    var materialPhoto = new THREE.MeshLambertMaterial({ map:texturePhoto, side:THREE.DoubleSide });
+    var geometryPhoto = new THREE.SphereGeometry(10.0,32,32);
     var meshPhoto = new THREE.Mesh( geometryPhoto, materialPhoto );
     scenePhoto.position.set( 0,0,0);
     scenePhoto.add( meshPhoto );
     scene.add( scenePhoto );
+
+//ちきう
+    var sceneEarth = new THREE.Scene();
+    var loaderEarth = new THREE.TextureLoader();
+    var textureEarth = loaderPhoto.load( './img/Earth.jpg');
+    var materialEarth = new THREE.MeshLambertMaterial({ map:textureEarth, side:THREE.DoubleSide });
+    var geometryEarth = new THREE.SphereGeometry(1.0,64,64);
+    var meshEarth = new THREE.Mesh( geometryEarth, materialEarth );
+    sceneEarth.position.set( 5,0,0);
+    sceneEarth.add( meshEarth );
+    scene.add( sceneEarth );
+
+//つ↑き↓
+
+    var sceneMoon = new THREE.Scene();
+    var loaderMoon = new THREE.TextureLoader();
+    var textureMoon = loaderPhoto.load( './img/Moon.jpg');
+//    var materialMoon = new THREE.MeshLambertMaterial({ map:textureMoon, side:THREE.DoubleSide });
+    var materialMoon = new THREE.MeshLambertMaterial({ color: 0xEEEEEE, side:THREE.DoubleSide });
+    var geometryMoon = new THREE.SphereGeometry(0.1,64,64);
+    var meshMoon = new THREE.Mesh( geometryMoon, materialMoon );
+    sceneMoon.position.set( 5,0,0);
+    sceneMoon.add( meshMoon );
+    scene.add( sceneMoon );
+
+
+    // ループ処理を呼び出す
+    (function(){
+    	EarthRag = EarthRag + 0.01;
+    	if(EarthRag>=360)EarthRag=0;
+    	EarthX = Math.cos(EarthRag)*EarthD;
+    	EarthZ = Math.sin(EarthRag)*EarthD;
+	    sceneEarth.position.set( EarthX , EarthY , EarthZ );
+    	sceneEarth.rotation.set(0,
+    							sceneEarth.rotation.y -= 0.1,
+    							0);
+
+
+    	MoonRag = MoonRag + 0.05;
+    	if(MoonRag>=360)MoonRag=0;
+    	MoonX = Math.cos(MoonRag)*MoonD;
+    	MoonZ = Math.sin(MoonRag)*MoonD;
+	    sceneMoon.position.set( sceneEarth.position.x + MoonX,
+	    						sceneEarth.position.y + MoonY,
+	    						sceneEarth.position.z + MoonZ);
+    	sceneMoon.rotation.set(0,
+    							sceneMoon.rotation.y -= 0.1,
+    							0);
+
+
+
+        // フラグにより再帰呼び出し
+        setTimeout(arguments.callee, fps);
+    })();
+
+
+
+
 
 }
 
