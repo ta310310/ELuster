@@ -18,13 +18,15 @@ var SpaceSize = 50
 var fps = 29.97;//1000 / 30;
 
 var EarthRag = 180;
+var EarthRagD= 0.001;
 var EarthX=0;
 var EarthY=0;
 var EarthZ=0;
-var EarthD= 30;
+var EarthD= 15;
 var EarthSize = 1
 
 var MoonRag = 0;
+var MoonRagD= 0.003;
 var MoonX=0;
 var MoonY=0;
 var MoonZ=0;
@@ -86,7 +88,7 @@ camera.position.set( 0, 0, 0 );
 
     // ƒ‹[ƒvˆ—‚ðŒÄ‚Ño‚·
     (function(){
-    	EarthRag = EarthRag + 0.001;
+    	EarthRag = EarthRag + EarthRagD;
     	if(EarthRag>=360)EarthRag=0;
     	EarthX = Math.cos(EarthRag)*EarthD;
     	EarthZ = Math.sin(EarthRag)*EarthD;
@@ -96,7 +98,7 @@ camera.position.set( 0, 0, 0 );
     							0);
 
 
-    	MoonRag = MoonRag + 0.0033;
+    	MoonRag = MoonRag + MoonRagD;
     	if(MoonRag>=360)MoonRag=0;
     	MoonX = Math.cos(MoonRag)*MoonD;
     	MoonZ = Math.sin(MoonRag)*MoonD;
