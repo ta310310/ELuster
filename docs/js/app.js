@@ -5,13 +5,6 @@ var controls = new THREE.VRControls(camera);
 var effect = new THREE.VREffect(renderer);
 var manager = new WebVRManager(renderer, effect);
 
-var sceneCube  = new THREE.Scene();
-var sceneSphere = new THREE.Scene();
-
-var meshCube = new THREE.Mesh();
-
-
-
 var SpaceSize = 50
 
 
@@ -129,9 +122,6 @@ var lastRender = 0;
 function render(timestamp) {
     var delta = Math.min(timestamp - lastRender, 500);
     lastRender = timestamp;
-
-    meshCube.rotation.x += delta * 0.0005
-    meshCube.rotation.z += delta * 0.001
 
     requestAnimationFrame(render);
     controls.update();
