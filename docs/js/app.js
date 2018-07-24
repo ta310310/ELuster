@@ -22,15 +22,17 @@ var EarthRagD= 0.001;
 var EarthX=0;
 var EarthY=0;
 var EarthZ=0;
-var EarthD= 15;
+var EarthD= 10;
 var EarthSize = 1
 
 var MoonRag = 0;
-var MoonRagD= 0.003;
+var MoonRagD= 0.0033;
 var MoonX=0;
 var MoonY=0;
 var MoonZ=0;
 var MoonD= 8;
+var MoonRot=0;
+var MoonRotD=0.0033;
 
 
 function init() {
@@ -105,8 +107,10 @@ camera.position.set( 0, 0, 0 );
 	    sceneMoon.position.set( sceneEarth.position.x + MoonX,
 	    						sceneEarth.position.y + MoonY,
 	    						sceneEarth.position.z + MoonZ);
+    	MoonRot -= + MoonRotD;
+    	if(MoonRag<0)MoonRot=360;
     	sceneMoon.rotation.set(0,
-    							sceneMoon.rotation.y -= 0.033,
+    							MoonRot,
     							0);
 
 
