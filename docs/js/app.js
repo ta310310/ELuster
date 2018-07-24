@@ -10,19 +10,25 @@ var sceneSphere = new THREE.Scene();
 
 var meshCube = new THREE.Mesh();
 
+
+
+var SpaceSize = 50
+
+
 var fps = 29.97;//1000 / 30;
 
-var EarthRag = 0;
+var EarthRag = 180;
 var EarthX=0;
 var EarthY=0;
 var EarthZ=0;
-var EarthD= 5;
+var EarthD= 30;
+var EarthSize = 1
 
 var MoonRag = 0;
 var MoonX=0;
 var MoonY=0;
 var MoonZ=0;
-var MoonD= 2;
+var MoonD= 8;
 
 
 function init() {
@@ -47,7 +53,7 @@ camera.position.set( 0, 0, 0 );
     var loaderPhoto = new THREE.TextureLoader();
     var texturePhoto = loaderPhoto.load( './img/starfield.jpg');
     var materialPhoto = new THREE.MeshLambertMaterial({ map:texturePhoto, side:THREE.DoubleSide });
-    var geometryPhoto = new THREE.SphereGeometry(10.0,32,32);
+    var geometryPhoto = new THREE.SphereGeometry(SpaceSize,64,64);
     var meshPhoto = new THREE.Mesh( geometryPhoto, materialPhoto );
     scenePhoto.position.set( 0,0,0);
     scenePhoto.add( meshPhoto );
@@ -58,9 +64,9 @@ camera.position.set( 0, 0, 0 );
     var loaderEarth = new THREE.TextureLoader();
     var textureEarth = loaderPhoto.load( './img/Earth.jpg');
     var materialEarth = new THREE.MeshLambertMaterial({ map:textureEarth, side:THREE.DoubleSide });
-    var geometryEarth = new THREE.SphereGeometry(1.0,64,64);
+    var geometryEarth = new THREE.SphereGeometry(EarthSize,64,64);
     var meshEarth = new THREE.Mesh( geometryEarth, materialEarth );
-    sceneEarth.position.set( 5,0,0);
+    sceneEarth.position.set( 10,0,0);
     sceneEarth.add( meshEarth );
     scene.add( sceneEarth );
 
@@ -71,16 +77,16 @@ camera.position.set( 0, 0, 0 );
     var textureMoon = loaderPhoto.load( './img/Moon.jpg');
 //    var materialMoon = new THREE.MeshLambertMaterial({ map:textureMoon, side:THREE.DoubleSide });
     var materialMoon = new THREE.MeshLambertMaterial({ color: 0xEEEEEE, side:THREE.DoubleSide });
-    var geometryMoon = new THREE.SphereGeometry(0.1,64,64);
+    var geometryMoon = new THREE.SphereGeometry(EarthSize/4,64,64);
     var meshMoon = new THREE.Mesh( geometryMoon, materialMoon );
-    sceneMoon.position.set( 5,0,0);
+    sceneMoon.position.set( 10,0,0);
     sceneMoon.add( meshMoon );
     scene.add( sceneMoon );
 
 
     // ƒ‹[ƒvˆ—‚ðŒÄ‚Ño‚·
     (function(){
-    	EarthRag = EarthRag + 0.01;
+    	EarthRag = EarthRag + 0.001;
     	if(EarthRag>=360)EarthRag=0;
     	EarthX = Math.cos(EarthRag)*EarthD;
     	EarthZ = Math.sin(EarthRag)*EarthD;
@@ -90,7 +96,7 @@ camera.position.set( 0, 0, 0 );
     							0);
 
 
-    	MoonRag = MoonRag + 0.05;
+    	MoonRag = MoonRag + 0.0033;
     	if(MoonRag>=360)MoonRag=0;
     	MoonX = Math.cos(MoonRag)*MoonD;
     	MoonZ = Math.sin(MoonRag)*MoonD;
@@ -98,7 +104,7 @@ camera.position.set( 0, 0, 0 );
 	    						sceneEarth.position.y + MoonY,
 	    						sceneEarth.position.z + MoonZ);
     	sceneMoon.rotation.set(0,
-    							sceneMoon.rotation.y -= 0.1,
+    							sceneMoon.rotation.y -= 0.033,
     							0);
 
 
