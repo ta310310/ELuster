@@ -76,9 +76,9 @@ camera.position.set( 0, 0, 0 );
 
     var sceneMoon = new THREE.Scene();
     var loaderMoon = new THREE.TextureLoader();
-    var textureMoon = loaderPhoto.load( './img/Moon.jpg');
-//    var materialMoon = new THREE.MeshLambertMaterial({ map:textureMoon, side:THREE.DoubleSide });
-    var materialMoon = new THREE.MeshLambertMaterial({ color: 0xEEEEEE, side:THREE.DoubleSide });
+    var textureMoon = loaderPhoto.load( './img/Mercator_Moon.png');
+    var materialMoon = new THREE.MeshLambertMaterial({ map:textureMoon, side:THREE.DoubleSide });
+//    var materialMoon = new THREE.MeshLambertMaterial({ color: 0xEEEEEE, side:THREE.DoubleSide });
     var geometryMoon = new THREE.SphereGeometry(EarthSize/4,64,64);
     var meshMoon = new THREE.Mesh( geometryMoon, materialMoon );
     sceneMoon.position.set( 10,0,0);
