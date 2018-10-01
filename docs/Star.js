@@ -22,7 +22,7 @@ function Vertex(x, y) {
 }
 
 function StarInit(){
-	for(i=0;i<128;i++){
+	for(i=0;i<16;i++){
 		StarPoint.push(new StarPoint_class(Math.random() * BG_GetStageWidth(),Math.random() * BG_GetStageHeight(),Math.random() * 4 + 1));
 	}
 
