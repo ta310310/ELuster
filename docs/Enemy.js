@@ -103,27 +103,29 @@ BG_EnemyBossLife(Enemy[i].life,Enemy[i].lifeMax);
 						Enemy_MyShipState.y,
 						0,2,1,    0,0);
 						Enemy[i].hit=false;
-/*						EnemyBullet_AddTargetFire(Enemy[i].x,Enemy[i].y,
+
+						EnemyBullet_AddTargetFire(Enemy[i].x,Enemy[i].y,
 						Enemy_MyShipState.x,
 						Enemy_MyShipState.y,
 						1,1,1,    2,60);
 						EnemyBullet_AddTargetFire(Enemy[i].x+20,Enemy[i].y,
 						Enemy_MyShipState.x,
 						Enemy_MyShipState.y,
-						1,1,1,    6,60);
+						1,1,1,    2,45);
+
 						EnemyBullet_AddTargetFire(Enemy[i].x-20,Enemy[i].y,
 						Enemy_MyShipState.x,
 						Enemy_MyShipState.y,
-						1,1,1,    6,60);
+						1,1,1,    2,45);
 						EnemyBullet_AddTargetFire(Enemy[i].x,Enemy[i].y+30,
 						Enemy_MyShipState.x,
 						Enemy_MyShipState.y,
-						1,1,1,    6,60);
+						1,1,1,    2,45);
 						EnemyBullet_AddTargetFire(Enemy[i].x,Enemy[i].y-30,
 						Enemy_MyShipState.x,
 						Enemy_MyShipState.y,
-						1,1,1,    6,60);
-*/						Enemy[i].hit=false;
+						1,1,1,    2,45);
+						Enemy[i].hit=false;
 					}
 
 				}
