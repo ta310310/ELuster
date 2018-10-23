@@ -40,7 +40,7 @@ function MyBulletFire( myShipState ){
 		myBullet[num].x		= myShipState.x-5;
 		myBullet[num].y		= myShipState.y;
 		myBullet[num].speed	= 10;
-		myBullet[num].power	= 1;
+		myBullet[num].power	= 2;
 		num1st=num;
 	}
 	else{

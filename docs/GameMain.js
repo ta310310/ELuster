@@ -21,7 +21,6 @@ function GameMain(){
 
 	BG_update();
 
-	GameEffect_Update();
 //var info2text = document.getElementById('info2');
 //info2.innerHTML = 'mode:'+Game.mode+' /c:'+count;
 
@@ -54,6 +53,7 @@ EnemyBullet_Disp();
 BG_Mask();
 BG_MyShipLife();
 
+	GameEffect_Update();
 		break;
 	case 5:
 		break;

@@ -105,7 +105,8 @@ function GameEffect_Update(){
 			case 0://自機Fire(自機に合わせて動く)
 
 		        ctx.beginPath();
-		        ctx.fillStyle = 'rgba(255,255,255,'+1-0.1*i+')';
+		        ctx.fillStyle = 'rgb(' + [Math.random() * 256 , Math.random() * 256 , Math.random() * 256] +')';
+//		        ctx.fillStyle = 'rgba(255,255,255,'+1-0.1*i+')';
 //		        ctx.fillStyle = 'rgb(255,255,255)';
 		        ctx.arc(GameEffect_MyShipState.x+GameEffect[i].x, 
 		        		GameEffect_MyShipState.y+GameEffect[i].y, 
@@ -117,7 +118,6 @@ function GameEffect_Update(){
 					GameEffect[i].alive = false;
 				}
 
-//		        ctx.fillStyle = 'rgb(' + Math.random() * 192 + ',' + Math.random() * 192 + ',' + Math.random() * 192 +')';
 
 				break;
 
@@ -125,7 +125,8 @@ function GameEffect_Update(){
 			case 1://自機Fire的に当たった
 
 		        ctx.beginPath();
-		        ctx.fillStyle = 'rgba(255,255,255,'+1-0.1*i+')';
+		        ctx.fillStyle = 'rgb(' + [Math.random() * 256 , Math.random() * 256 , Math.random() * 256] +')';
+//		        ctx.fillStyle = 'rgba(255,255,255,'+1-0.1*i+')';
 //		        ctx.fillStyle = 'rgb(255,255,255)';
 		        ctx.arc(GameEffect[i].x, 
 		        		GameEffect[i].y, 

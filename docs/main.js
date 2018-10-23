@@ -1,5 +1,7 @@
 // - global -------------------------------------------------------------------
 var screenCanvas, info;
+var screenPadCanvas;
+
 var run = true;
 var fps = 1000 / 120;
 var mouse = new Point();
@@ -21,6 +23,20 @@ window.onload = function(){
     // エレメント関連
     info = document.getElementById('info');
 	info2 = document.getElementById('info2');
+/*
+    // PADスクリーンの初期化
+    screenPadCanvas = document.getElementById('screen_pad');
+    screenPadCanvas.width = 512;
+    screenPadCanvas.height = 128;
+	var padctx = screenPadCanvas.getContext('2d');
+
+	var padimg = new Image();
+	padimg.src = "./PadNull.bmp";
+        padctx.beginPath();
+//	padctx.drawImage(padimg,384,0,511,127);
+	padctx.drawImage(padimg,0,0);
+        padctx.fill();
+*/
 
 /*
 // getGamepads メソッドに対応している
