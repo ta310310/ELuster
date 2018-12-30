@@ -2,7 +2,24 @@
 var keyPress = new Array(256);
 
 
-function KeyInit(){
+
+
+/*
+キーボード入力
+上：'↑'or'8'
+下：'↓'or'2'
+左：'←'or'4'
+右：'→'or'6'
+
+撃つ：' (SPACE)'
+セレクト：'(SHIFT)'
+アクセル：'+'or'(PageUp)'
+ブレーキ：'-'or'(PageDown)'
+
+
+*/
+
+function Input_KeyInit(){//PUBLIC
 
 	for(i=0;i<256;i++){
 		keyPress[i] = false;
@@ -10,16 +27,45 @@ function KeyInit(){
 
 };
 
-function downKey(code){
+function Input_DownKey(code){//PUBLIC
 	keyPress[code] = true;
 };
 
-function upKey(code){
+function Input_UpKey(code){//PUBLIC
 	keyPress[code] = false;
 };
-function isPressKey(code){
+function Input_IsPressKey(code){//PUBLIC
 	return keyPress[code];
 };
+
+function GameKeyState_IsKeyShoot(){//'(SPACE)'
+	if(keyPress[32] == true ){
+		return true;
+	}
+	return false;
+}
+
+function GameKeyState_IsKeySelect(){//'(SHIFT)'
+	if(keyPress[16] == true ){
+		return true;
+	}
+	return false;
+}
+
+function GameKeyState_IsKeyAccel(){//'+'or'(PageUp)'
+	if(keyPress[16] == true ){
+		return true;
+	}
+	return false;
+}
+
+function GameKeyState_IsKeyBreak(){//'-'or'(PageDown)'
+	if(keyPress[16] == true ){
+		return true;
+	}
+	return false;
+}
+
 
 
 function GameKeyState_IsKeyUp(){
@@ -90,8 +136,15 @@ var buttonUp;
 var buttonDown;
 var buttonLeft;
 var buttonRight;
-var buttonA;
-var buttonB;
+var buttonA;//select
+var buttonB;//shoot
+
+var buttonAccel;
+var buttonBreak;
+
+var viewStickH;//視察水平方向
+var viewStickV;//視察垂直方向
+
 var fps = 1000/60;
 var gamePadInterval=false;
 var gamePadIntervalRunning=false;
@@ -132,6 +185,16 @@ var SS='';
 				buttonB=buttons[1].pressed;
 				SS=SS+'/1:'+buttons[1].pressed;
 			}
+
+			if(buttons[4]){//L1 break
+				buttonBreak=buttons[4].pressed;
+				SS=SS+'/4:'+buttons[4].pressed;
+			}
+			if(buttons[5]){//R1 Accel
+				buttonAccel=buttons[5].pressed;
+				SS=SS+'/5:'+buttons[5].pressed;
+			}
+
 			
 			if(buttons[12]){//上
 				buttonUp=buttons[12].pressed;
@@ -180,11 +243,24 @@ SS=SS+'/axes[1]:'+axes[1];
 					}
 				}
 			}
-//	var info2 = document.getElementById('info2');
-//info2.innerHTML = 'i:'+i+'/gamePadInterval:'+gamePadInterval+'/gamePadCheckCount:'+gamePadCheckCount;
-//info2.innerHTML = SS;SS='';
-//	var info3 = document.getElementById('info3');
-//info3.innerHTML = 'up:'+buttonUp+'/down:'+buttonDown+'/left:'+buttonLeft+'/up:'+buttonRight+'/A:'+buttonA+'/B:'+buttonB+'/ts'+gamepad.timestamp;
+
+			viewStickH=Math.round(axes[2]>>>7)<<<7;
+SS=SS+'/axes[2]:'+axes[2];
+
+			viewStickV=Math.round(axes[3]>>>7)<<<7;
+SS=SS+'/axes[3]:'+axes[3];
+
+
+
+
+
+
+
+	var info2 = document.getElementById('info2');
+info2.innerHTML = 'i:'+i+'/gamePadInterval:'+gamePadInterval+'/gamePadCheckCount:'+gamePadCheckCount;
+info2.innerHTML = SS;SS='';
+	var info3 = document.getElementById('info3');
+info3.innerHTML = 'up:'+buttonUp+'/down:'+buttonDown+'/left:'+buttonLeft+'/up:'+buttonRight+'/A:'+buttonA+'/B:'+buttonB+'/ts'+gamepad.timestamp;
 
 			break;
 		}

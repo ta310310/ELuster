@@ -1,5 +1,5 @@
 // - global -------------------------------------------------------------------
-var screenCanvas, info;
+var screenCanvas, info,info2,info3;
 var screenPadCanvas;
 
 var run = true;
@@ -23,6 +23,7 @@ window.onload = function(){
     // エレメント関連
     info = document.getElementById('info');
 	info2 = document.getElementById('info2');
+	info3 = document.getElementById('info3');
 /*
     // PADスクリーンの初期化
     screenPadCanvas = document.getElementById('screen_pad');
@@ -69,8 +70,8 @@ if(navigator.getGamepads){
 }
 */
 
-	GameMainInit();
-	GamePadState_On();
+//	GameMainInit();
+	Input_GamePadState_On();
     // ループ処理を呼び出す
     (function(){
 		if(pause == false){
@@ -113,7 +114,7 @@ if(navigator.getGamepads){
 	        // HTMLを更新
 	        info.innerHTML = infoTxt;
 
-			GameMain();
+//			GameMain();
 
 	    }
 	    else{
@@ -129,19 +130,19 @@ if(navigator.getGamepads){
 };
 
 window.onbeforeunload = function(){
-	KeyInit();
-	GamePadState_Off();
+	Input_KeyInit();
+	Input_GamePadState_Off();
 	pause = true;
 };
 
 window.onblur = function(){
-	KeyInit();
-//	GamePadState_On();
+	Input_KeyInit();
+//	Input_GamePadState_On();
 	pause = false;
 };
 
 window.onfocus = function(){
-//	GamePadState_Off();
+//	Input_GamePadState_Off();
 	pause = false;
 };
 
@@ -157,7 +158,7 @@ function mouseMove(event){
 function keyDown(event){
     // キーコードを取得
     var ck = event.keyCode;
-	downKey(ck);
+	Input_DownKey(ck);
     // Escキーが押されていたらフラグを降ろす
     if(ck === 27){run = false;}
 }
@@ -165,7 +166,7 @@ function keyDown(event){
 function keyUp(event){
     // キーコードを取得
     var ck = event.keyCode;
-    upKey(ck)
+    Input_UpKey(ck)
 }
 
 
